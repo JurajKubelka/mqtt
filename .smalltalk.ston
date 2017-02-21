@@ -1,0 +1,14 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #configuration : 'MQTTChat',
+      #repository : 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/MQTT/main/',
+      #load : [ 'default' ],
+      #platforms : [ #pharo ],
+      #version: #stable
+    }
+  ],
+  #testing : {
+   #categories: [ 'MQTT-Tests' ]
+    }
+}
