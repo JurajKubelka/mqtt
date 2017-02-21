@@ -1,7 +1,7 @@
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
-      #configuration : 'MQTTChat',
+      #configuration : 'MQTT',
       #repository : 'http://smalltalkhub.com/mc/SvenVanCaekenberghe/MQTT/main/',
       #load : [ 'default' ],
       #platforms : [ #pharo ],
