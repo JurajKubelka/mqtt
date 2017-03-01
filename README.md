@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/JurajKubelka/mqtt.svg?branch=master)](https://travis-ci.org/JurajKubelka/mqtt)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/0gh4kg40l8gftn63/branch/master?svg=true)](https://ci.appveyor.com/project/JurajKubelka/mqtt/branch/master)
+
 MQTT is a light-weight publish/subscribe messaging protocol, originally created around 1998. It is now an official open industry ISO standard. It is perfect for large-scale Internet of Things applications and high performance mobile messaging.
 
 The publish/subscribe messaging pattern requires a message broker. The broker is responsible for distributing messages to interested clients based on the topic of a message. Parties communicating with each other over MQTT would all be clients in different roles, like producers and consumers, using the broker as middleware.
