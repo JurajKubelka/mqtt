@@ -32,12 +32,12 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew services start mosquitto ; fi
   - mosquitto_pub -h localhost -p 1883 -t abc -m 'checking mosquitto connection'
 
- after_success:
+after_success:
   - echo "=== MOSQUITTO LOG START (after_success) ==="
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cat /var/log/mosquitto.log ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cat /usr/local/var/log/mosquitto.log ; fi
   - echo "=== MOSQUITTO LOG END ==="
- after_failure:
+after_failure:
   - echo "=== MOSQUITTO LOG START (after_failure) ==="
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cat /var/log/mosquitto.log ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cat /usr/local/var/log/mosquitto.log ; fi
