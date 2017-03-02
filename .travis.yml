@@ -22,6 +22,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo 'connection_messages true' | sudo tee -a /etc/mosquitto/mosquitto.conf ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo 'log_timestamp true' | sudo tee -a /etc/mosquitto/mosquitto.conf ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo service mosquitto start ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo netstat -lpn ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install mosquitto ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo rm -f /usr/local/var/log/mosquitto.log ; fi
