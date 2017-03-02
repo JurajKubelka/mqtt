@@ -16,11 +16,11 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo service mosquitto stop ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo rm -f /var/log/mosquitto.log ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo id ; sudo ls -lR  /etc/mosquitto/mosquitto.conf ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo ' ' >> /etc/mosquitto/mosquitto.conf ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo 'log_dest file /var/log/mosquitto.log' >> /etc/mosquitto/mosquitto.conf ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo 'log_type all' >> /etc/mosquitto/mosquitto.conf ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo 'connection_messages true' >> /etc/mosquitto/mosquitto.conf ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo 'log_timestamp true' >> /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo ' ' | sudo tee -a /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo 'log_dest file /var/log/mosquitto.log' | sudo tee -a /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo 'log_type all' | sudo tee -a /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo 'connection_messages true' | sudo tee -a /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then echo 'log_timestamp true' | sudo tee -a /etc/mosquitto/mosquitto.conf ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo service mosquitto start ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install mosquitto ; fi
