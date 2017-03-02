@@ -12,7 +12,33 @@ smalltalk:
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y mosquitto mosquitto-clients ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install -y mosquitto mosquitto-clients ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo service mosquitto stop ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo ' ' >> /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo rm -f /var/log/mosquitto.log ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo 'log_dest file /var/log/mosquitto.log' >> /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo 'log_type all' >> /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo 'connection_messages true' >> /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo echo 'log_timestamp true' >> /etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo service mosquitto start ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install mosquitto ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo rm -f /usr/local/var/log/mosquitto.log ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo echo ' ' >> /usr/local/etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo echo 'log_dest file /usr/local/var/log/mosquitto.log' >> /usr/local/etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo echo 'log_type all' >> /usr/local/etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo echo 'connection_messages true' >> /usr/local/etc/mosquitto/mosquitto.conf ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo echo 'log_timestamp true' >> /usr/local/etc/mosquitto/mosquitto.conf ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew services start mosquitto ; fi
   - mosquitto_pub -h localhost -p 1883 -t abc -m 'checking mosquitto connection'
+
+ after_success:
+  - echo "=== MOSQUITTO LOG START (after_success) ==="
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cat /var/log/mosquitto.log ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cat /usr/local/var/log/mosquitto.log ; fi
+  - echo "=== MOSQUITTO LOG END ==="
+ after_failure:
+  - echo "=== MOSQUITTO LOG START (after_failure) ==="
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then cat /var/log/mosquitto.log ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then cat /usr/local/var/log/mosquitto.log ; fi
+  - echo "=== MOSQUITTO LOG END ==="
