@@ -6,19 +6,20 @@
 #  installlinux, installosx
 #  loglinux, logosx
 
-MOSQUITTO_CONF="/etc/mosquitto/conf.d"
-PHARO_CONF="${MOSQUITTO_CONF}/pharo.conf"
+set -e # stop immediatelly on any error
+
+LINUX_MOSQUITTO_CONF_D="/etc/mosquitto/conf.d"
+LINUX_PHARO_CONF="${LINUX_MOSQUITTO_CONF_D}/pharo.conf"
 LINUX_MOSQUITTO_LOG="/var/log/mosquitto/mosquitto.log"
 
-OSX_MOSQUITTO_LOG="/usr/local/var/log/mosquitto.log"
 OSX_MOSQUITTO_CONF="/usr/local/etc/mosquitto/mosquitto.conf"
+OSX_MOSQUITTO_LOG="/usr/local/var/log/mosquitto.log"
 
 function installlinux {
     echo "Installing mosquitto"
     sudo rm -f ${LINUX_MOSQUITTO_LOG}
-    sudo mkdir -p "${MOSQUITTO_CONF}"
-    cat <<EOF | sudo tee "${PHARO_CONF}"
-log_dest file ${LINUX_MOSQUITTO_LOG}
+    sudo mkdir -p "${LINUX_MOSQUITTO_CONF_D}"
+    cat <<EOF | sudo tee "${LINUX_PHARO_CONF}"
 log_type all
 connection_messages true
 log_timestamp true
