@@ -10,7 +10,10 @@ smalltalk:
   - Pharo-5.0
 
 before_install:
-  - mosquitto.sh install
+  - ./mosquitto.sh install
 
 after_success:
-  - mosquitto.sh log
+  - ./mosquitto.sh log
+
+after_failure:
+  - ./mosquitto.sh log
